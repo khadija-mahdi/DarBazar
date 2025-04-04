@@ -19,6 +19,6 @@ django-apscheduler
 django_otp
 pytesseract
 drf-spectacular
-
+daphne
 numpy
 aiohttp 
