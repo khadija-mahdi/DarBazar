@@ -14,15 +14,10 @@ from pathlib import Path
 from datetime import timedelta
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-OPENAI_API_KEY = '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'
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+BASE_DIR = Path(__file__).resolve().parent.paren
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+$zeq78uqk)w=h0g6u!fpde829wmaek87f(dra0!9!!6u76_*t'
-GOOGLE_API_KEY='AIzaSyATn-_3wsWJXo6fyG61tJlA1_Wkj5kSkn4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
