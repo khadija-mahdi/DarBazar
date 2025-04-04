@@ -1,0 +1,39 @@
+[
+    {
+        "model": "users.customuser",
+        "pk": 1,
+        "fields": {
+            "email": "Yassine.rahmi@ocpgroup.ma",
+            "password": "pbkdf2_sha256$600000$pY36DjoBkyLS1ezMNvQQ31$MdSEfksVMQ2J0sL0Hkq6+z8KprsgJsATwn8w4A3u7tc=",
+            "first_name": "Yassin",
+            "last_name": "Rahimi",
+            "is_active": true,
+            "is_staff": true
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 2,
+        "fields": {
+            "email": "khadija@ocpgroup.ma",
+            "password": "pbkdf2_sha256$600000$pY36DjoBkyLS1ezMNvQQ31$MdSEfksVMQ2J0sL0Hkq6+z8KprsgJsATwn8w4A3u7tc=",
+            "first_name": "Khadija",
+            "last_name": "Mahdi",
+            "is_active": true,
+            "is_staff": false
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 3,
+        "fields": {
+            "email": "admin@ocpgroup.ma",
+            "password": "pbkdf2_sha256$600000$pY36DjoBkyLS1ezMNvQQ31$MdSEfksVMQ2J0sL0Hkq6+z8KprsgJsATwn8w4A3u7tc=",
+            "first_name": "Admin",
+            "last_name": "User",
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true
+        }
+    }
+]

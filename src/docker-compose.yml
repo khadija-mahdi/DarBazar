@@ -1,0 +1,102 @@
+services:
+  nginx:
+    restart: always
+    container_name: nginx
+    build:
+      context: ./nginx
+    networks:
+      - darBazar-network
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - frontend
+      - backend
+      - redis
+      - adminer
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt/live/gosimple.ma/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/gosimple.ma/privkey.pem:/etc/ssl/private/privkey.pem:ro
+
+  frontend:
+    restart: always
+    container_name: frontend
+    build:
+      context: ./frontend/build-tools
+    networks:
+      - darBazar-network
+    volumes:
+      - darBazar-frontend_volume:/var/app
+    depends_on:
+      - backend
+
+  backend:
+    restart: always
+    container_name: backend
+    build:
+      context: ./backend/build-tools
+    command: [ "python3", "manage.py", "runserver", "0.0.0.0:8000" ]
+    networks:
+      - darBazar-network
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - darBazar-backend_volume:/var/app
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    restart: always
+    container_name: redis
+    build:
+      context: ./redis
+    networks:
+      - darBazar-network
+    expose:
+      - 6379
+
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    networks:
+      - darBazar-network
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - darBazar-network
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  darBazar-backend_volume:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "${PWD}/src/backend/"
+
+  darBazar-frontend_volume:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "${PWD}/src/frontend"
+      
+
+  db_volume:
+
+networks:
+  darBazar-network:
+    name: backend
